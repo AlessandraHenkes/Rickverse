@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Rickverse</string>
+
+    <!-- Navigation and titles -->
+    <string name="characters">Characters</string>
+    <string name="search">Search</string>
+    <string name="favorites">Favorites</string>
+    <string name="search_characters">Search characters</string>
+    <string name="search_results">Search results</string>
+
+    <!-- Character -->
+    <string name="status_colon">Status:</string>
+    <string name="specie_colon">Specie:</string>
+    <string name="gender_colon">Gender:</string>
+    <string name="origin_colon">Origin:</string>
+
+    <!-- Search -->
+    <string name="name">Name</string>
+    <string name="specie">Specie</string>
+    <string name="status">Status</string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="unknown">Unknown</string>
+    <string name="minimum_character_search_error">Enter at least 3 characters</string>
+
+</resources>

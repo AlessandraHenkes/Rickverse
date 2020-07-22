@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="title_font_size">32sp</dimen>
+    <dimen name="text_font_size">16sp</dimen>
+    <dimen name="text_small_font_size">12sp</dimen>
+
+    <dimen name="margin_outside">40dp</dimen>
+    <dimen name="margin_inside">32dp</dimen>
+    <dimen name="margin_character_info_top">16dp</dimen>
+    <dimen name="margin_character_info_value_start">4dp</dimen>
+    <dimen name="margin_fab_end">16dp</dimen>
+    <dimen name="margin_fab_bottom">28dp</dimen>
+
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="fab_button_height">56dp</dimen>
+    <dimen name="fab_button_width">56dp</dimen>
+
+    <dimen name="character_card_height">168dp</dimen>
+    <dimen name="character_card_width">140dp</dimen>
+    <dimen name="character_card_radius">10dp</dimen>
+
+</resources>
