@@ -19,6 +19,33 @@
         - Chain;
         - Group.
 
+### 2º dia (25/07):
+- Layouts:
+    - Componentes:
+        - Classe;
+        - Attrs.
+    - Tag include;
+    - Scroll;
+    - Style vs theme;
+    - Material components;
+    - Color selectors.
+- Activity vs Fragment:
+    - Definições;
+    - Lifecycle;
+    - Criação;
+    - Navegação:
+        - Intent;
+        - Transaction;
+        - BottomNavigationView.
+- Formulários:
+    - Componentes UI;
+    - Validações de campos.
+- Kotlin:
+    - Extension functions;
+    - Scoping functions (run, let, apply, with, also);
+    - Laço for;
+    - Declaração de variáveis (const, val, var, lateinit, by lazy).
+
 
 
 
