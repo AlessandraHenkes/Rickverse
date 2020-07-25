@@ -4,8 +4,46 @@
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="colorAccent">@color/accent</item>
-        <item name="android:background">@color/background</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="android:textColor">@color/font_text</item>
+        <item name="android:textSize">@dimen/text_font_size</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.Fullscreen" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
+        <item name="colorPrimary">?colorPrimary</item>
+    </style>
+
+    <style name="TextInputLayout">
+        <item name="android:textColorHint">@color/font_text_disabled</item>
+        <item name="colorControlNormal">@color/background_elevation</item>
+    </style>
+
+    <style name="Button">
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:background">@color/button_primary</item>
+        <item name="android:textColor">@color/font_button</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CharacterInfoLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/margin_character_info_top</item>
+        <item name="android:textColor">?colorAccent</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="CharacterInfoValue">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/margin_character_info_value_start</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 </resources>

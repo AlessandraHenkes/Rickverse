@@ -20,4 +20,10 @@
     <dimen name="character_card_width">140dp</dimen>
     <dimen name="character_card_radius">10dp</dimen>
 
+    <dimen name="toolbar_elevation">4dp</dimen>
+
+    <dimen name="title_decoration_width">100dp</dimen>
+    <dimen name="title_decoration_height">2dp</dimen>
+    <dimen name="title_decoration_margin">10dp</dimen>
+
 </resources>

@@ -25,6 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_outside"
+        android:fontFamily="sans-serif"
         android:text="@string/characters"
         android:textAllCaps="true"
         android:textColor="@color/font_title"
@@ -36,9 +37,9 @@
 
     <View
         android:id="@+id/view"
-        android:layout_width="100dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="10dp"
+        android:layout_width="@dimen/title_decoration_width"
+        android:layout_height="@dimen/title_decoration_height"
+        android:layout_marginTop="@dimen/title_decoration_margin"
         android:background="@color/primary"
         app:layout_constraintStart_toStartOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -56,28 +57,77 @@
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <TextView
-        android:id="@+id/tvStatusLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/tvCharacterStatusLabel"
+        style="@style/CharacterInfoLabel"
         android:layout_marginTop="@dimen/margin_inside"
         android:text="@string/status_colon"
-        android:textColor="@color/accent"
-        android:textSize="@dimen/text_font_size"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/gdStart"
         app:layout_constraintTop_toBottomOf="@id/ivCharacter" />
 
     <TextView
-        android:id="@+id/tvStatusValue"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_character_info_value_start"
-        android:textSize="@dimen/text_font_size"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tvStatusLabel"
-        app:layout_constraintEnd_toStartOf="@id/gdEnd"
-        app:layout_constraintStart_toEndOf="@id/tvStatusLabel"
-        tools:text="Alive" />
+        android:id="@+id/tvCharacterStatusValue"
+        style="@style/CharacterInfoValue"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterStatusLabel"
+        app:layout_constraintEnd_toEndOf="@id/gdEnd"
+        app:layout_constraintStart_toEndOf="@id/tvCharacterStatusLabel"
+        tools:text="@string/alive" />
 
+    <TextView
+        android:id="@+id/tvCharacterSpecieLabel"
+        style="@style/CharacterInfoLabel"
+        android:text="@string/specie_colon"
+        app:layout_constraintStart_toStartOf="@id/gdStart"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterStatusLabel" />
+
+    <TextView
+        android:id="@+id/tvCharacterSpecieValue"
+        style="@style/CharacterInfoValue"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterSpecieLabel"
+        app:layout_constraintEnd_toEndOf="@id/gdEnd"
+        app:layout_constraintStart_toEndOf="@id/tvCharacterSpecieLabel"
+        tools:text="Human" />
+
+    <TextView
+        android:id="@+id/tvCharacterGenderLabel"
+        style="@style/CharacterInfoLabel"
+        android:text="@string/gender_colon"
+        app:layout_constraintStart_toStartOf="@id/gdStart"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterSpecieLabel" />
+
+    <TextView
+        android:id="@+id/tvCharacterGenderValue"
+        style="@style/CharacterInfoValue"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterGenderLabel"
+        app:layout_constraintEnd_toEndOf="@id/gdEnd"
+        app:layout_constraintStart_toEndOf="@id/tvCharacterGenderLabel"
+        tools:text="Male" />
+
+    <TextView
+        android:id="@+id/tvCharacterOriginLabel"
+        style="@style/CharacterInfoLabel"
+        android:layout_marginBottom="@dimen/margin_outside"
+        android:text="@string/origin_colon"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@id/gdStart"
+        app:layout_constraintTop_toBottomOf="@id/tvCharacterGenderLabel"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/tvCharacterOriginValue"
+        style="@style/CharacterInfoValue"
+        app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterOriginLabel"
+        app:layout_constraintEnd_toEndOf="@id/gdEnd"
+        app:layout_constraintStart_toEndOf="@id/tvCharacterOriginLabel"
+        tools:text="Earth (C-137)" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabFavoriteCharacter"
+        android:layout_width="@dimen/fab_button_width"
+        android:layout_height="@dimen/fab_button_height"
+        android:layout_marginEnd="@dimen/margin_fab_end"
+        android:layout_marginBottom="@dimen/margin_fab_bottom"
+        android:src="@drawable/ic_favorite_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,59 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".characters.CharactersFragment">
+    android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/margin_outside"
-        android:layout_marginTop="@dimen/margin_outside"
-        android:layout_marginEnd="@dimen/margin_outside"
-        android:text="@string/characters"
-        android:textAllCaps="true"
-        android:textColor="@color/font_title"
-        android:textSize="@dimen/title_font_size"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/margin_outside"
+        tools:context=".characters.CharactersFragment">
 
-    <View
-        android:id="@+id/view"
-        android:layout_width="100dp"
-        android:layout_height="2dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/primary"
-        app:layout_constraintStart_toStartOf="@id/tvTitle"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="100dp"
-        android:layout_height="@dimen/character_card_height"
-        android:layout_marginTop="@dimen/margin_inside"
-        app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="@dimen/character_card_radius"
-        app:layout_constraintEnd_toStartOf="@+id/cardView2"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView2"
-        android:layout_width="@dimen/character_card_width"
-        android:layout_height="@dimen/character_card_height"
-        android:layout_marginTop="@dimen/margin_inside"
-        app:cardBackgroundColor="@color/primary"
-        app:cardCornerRadius="@dimen/character_card_radius"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cardView"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
