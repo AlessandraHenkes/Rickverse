@@ -14,10 +14,6 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="Widget.App.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView.Colored">
-        <item name="colorPrimary">?colorPrimary</item>
-    </style>
-
     <style name="TextInputLayout">
         <item name="android:textColorHint">@color/font_text_disabled</item>
         <item name="colorControlNormal">@color/background_elevation</item>
