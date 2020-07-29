@@ -3,7 +3,7 @@ package com.example.rickverse
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.example.rickverse.characters.CharactersFragment
+import com.example.rickverse.character.CharactersFragment
 import com.example.rickverse.favorite.FavoritesFragment
 import com.example.rickverse.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*

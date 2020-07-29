@@ -23,4 +23,12 @@
     <string name="unknown">Unknown</string>
     <string name="minimum_character_search_error">Enter at least 3 characters</string>
 
+    <!-- API requests -->
+    <string name="loading">Loading…</string>
+    <string name="no_more_characters_available">No more characters available.</string>
+    <string name="something_went_wrong">Something went wrong.</string>
+
+    <!-- Shared Preferences Key -->
+    <string name="shared_preferences_key">com.example.rickverse</string>
+
 </resources>

@@ -95,8 +95,8 @@ class SearchFragment : Fragment() {
     private fun verifyValueAndSetError(
         value: String,
         textInputLayout: TextInputLayout,
-        validation: ((value: String) -> Boolean),
-        showError: Boolean = false
+        showError: Boolean = false,
+        validation: ((value: String) -> Boolean)
     ) {
         if (value.isNotEmpty() && validation(value).not() && showError) {
             textInputLayout.showError(getString(R.string.minimum_character_search_error))
@@ -104,7 +104,6 @@ class SearchFragment : Fragment() {
 
         updateButtonState()
     }
-
 
     private fun updateButtonState() {
         btnSearch.isEnabled = isNameValid || isSpeciesValid || isStatusValid
