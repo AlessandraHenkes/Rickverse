@@ -24,6 +24,19 @@
             app:layout_constraintTop_toTopOf="parent"
             app:text="@string/characters" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCharacter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_inside"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ttCharacters"
+            app:spanCount="@integer/characters_list_span_count"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_character" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
