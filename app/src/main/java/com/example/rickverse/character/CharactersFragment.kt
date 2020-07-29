@@ -8,11 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.rickverse.R
 import com.example.rickverse.character.adpter.CharactersAdapter
-import com.example.rickverse.model.CharacterPreview
+import com.example.rickverse.extension.showToast
+import com.example.rickverse.model.CharactersResponse
+import com.example.rickverse.service.RetrofitClient
 import com.example.rickverse.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_characters.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CharactersFragment : Fragment() {
+
+    private lateinit var charactersAdapter: CharactersAdapter
+    private var hasNextPage: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -26,26 +34,12 @@ class CharactersFragment : Fragment() {
 
     private fun setUI() {
         with(rvCharacter) {
-            adapter = CharactersAdapter(
-                mutableListOf(
-                    CharacterPreview(
-                        id = 1,
-                        name = "Teste",
-                        image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                    ),
-                    CharacterPreview(
-                        id = 2,
-                        name = "Teste 2",
-                        image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                    ),
-                    CharacterPreview(
-                        id = 3,
-                        name = "Teste 3",
-                        image = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-                    )
-                ),
+            charactersAdapter = CharactersAdapter(
+                mutableListOf(),
                 this@CharactersFragment::onClick
             )
+
+            adapter = charactersAdapter
 
             addItemDecoration(
                 GridSpacingItemDecoration(
@@ -59,6 +53,27 @@ class CharactersFragment : Fragment() {
     }
 
     private fun getCharacters(page: Int? = null) {
+        activity?.showToast(messageId = R.string.loading)
+        RetrofitClient
+            .getCharacterService()
+            .getAll(page)
+            .enqueue(object : Callback<CharactersResponse> {
+                override fun onResponse(
+                    call: Call<CharactersResponse>?,
+                    response: Response<CharactersResponse>?
+                ) {
+                    response?.takeIf { it.isSuccessful }?.run {
+                        body()?.run {
+                            hasNextPage = info.next.isNullOrEmpty().not()
+                            charactersAdapter.addItems(characters)
+                        }
+                    } ?: activity?.showToast()
+                }
+
+                override fun onFailure(call: Call<CharactersResponse>?, t: Throwable?) {
+                    activity?.showToast()
+                }
+            })
     }
 
     private fun onClick(id: Int) {
