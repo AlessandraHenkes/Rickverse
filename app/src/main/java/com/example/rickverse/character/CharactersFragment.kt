@@ -11,6 +11,7 @@ import com.example.rickverse.character.adpter.CharactersAdapter
 import com.example.rickverse.extension.showToast
 import com.example.rickverse.model.CharactersResponse
 import com.example.rickverse.service.RetrofitClient
+import com.example.rickverse.util.EndlessScrollView
 import com.example.rickverse.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_characters.*
 import retrofit2.Call
@@ -20,7 +21,7 @@ import retrofit2.Response
 class CharactersFragment : Fragment() {
 
     private lateinit var charactersAdapter: CharactersAdapter
-    private var hasNextPage: Boolean = false
+    private var hasNextPage: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -48,11 +49,22 @@ class CharactersFragment : Fragment() {
                     )
                 )
             )
-
         }
+
+        nsvCharacters.setOnScrollChangeListener(object : EndlessScrollView() {
+            override fun onLoadMore(page: Int) {
+                getCharacters(page)
+            }
+        })
+
     }
 
     private fun getCharacters(page: Int? = null) {
+        if (hasNextPage.not()) {
+            activity?.showToast(R.string.no_more_characters_available)
+            return
+        }
+
         activity?.showToast(messageId = R.string.loading)
         RetrofitClient
             .getCharacterService()
