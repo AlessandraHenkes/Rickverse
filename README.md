@@ -46,7 +46,30 @@
     - Laço for;
     - Declaração de variáveis (const, val, var, lateinit, by lazy).
 
-
-
-
-
+### 3º dia (29/07):
+- Listas:
+    - ListView:
+        - Layout;
+        - Adapter.
+    - RecyclerView:
+        - Layout;
+        - Layout manager;
+        - Item decoration;
+        - Adapter;
+        - View holder.
+- Carregar imagens com Glide;
+- Permissão (internet);
+- Passar parâmetros por uma intent;
+- Chamadas para a API com Retrofit:
+    - Criação de models:
+        - Data class;
+        - Anotação "Serialized name".
+    - Criação de services:
+        - HTTP methods (GET e POST);
+        - Query parameters;
+        - Path parameters.
+    - Configuração do Gson;
+    - Configuração do OkHttpClient;
+    - Configuração do Retrofit;
+    - Execução da chamada e Callback de retorno (utilizando enqueue).
+- Infinite scroll com OnScrollChangeListener.
