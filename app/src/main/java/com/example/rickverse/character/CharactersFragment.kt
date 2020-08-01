@@ -6,22 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
 import com.example.rickverse.character.adpter.CharactersAdapter
 import com.example.rickverse.extension.showToast
-import com.example.rickverse.model.CharactersResponse
 import com.example.rickverse.service.RetrofitClient
+import com.example.rickverse.util.CharacterViewModelFactory
 import com.example.rickverse.util.EndlessScrollView
 import com.example.rickverse.util.GridSpacingItemDecoration
 import kotlinx.android.synthetic.main.fragment_characters.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class CharactersFragment : Fragment() {
 
+    private lateinit var charactersViewModel: CharactersViewModel
     private lateinit var charactersAdapter: CharactersAdapter
-    private var hasNextPage: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -29,8 +29,17 @@ class CharactersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        charactersViewModel = ViewModelProvider(
+            this,
+            CharacterViewModelFactory(RetrofitClient.getCharacterService())
+        ).get(CharactersViewModel::class.java)
+
         setUI()
-        getCharacters()
+        initiateObservers()
+
+        if (savedInstanceState == null) {
+            charactersViewModel.loadCharacters()
+        }
     }
 
     private fun setUI() {
@@ -53,39 +62,28 @@ class CharactersFragment : Fragment() {
 
         nsvCharacters.setOnScrollChangeListener(object : EndlessScrollView() {
             override fun onLoadMore(page: Int) {
-                getCharacters(page)
+                charactersViewModel.loadCharacters()
             }
         })
 
     }
 
-    private fun getCharacters(page: Int? = null) {
-        if (hasNextPage.not()) {
-            activity?.showToast(R.string.no_more_characters_available)
-            return
-        }
+    private fun initiateObservers() {
+        charactersViewModel.run {
+            observeToShowToast(showMessageHasReachedEnd, R.string.no_more_characters_available)
+            observeToShowToast(showMessageLoading, R.string.loading)
+            observeToShowToast(showMessageError, R.string.something_went_wrong)
 
-        activity?.showToast(messageId = R.string.loading)
-        RetrofitClient
-            .getCharacterService()
-            .getAll(page)
-            .enqueue(object : Callback<CharactersResponse> {
-                override fun onResponse(
-                    call: Call<CharactersResponse>?,
-                    response: Response<CharactersResponse>?
-                ) {
-                    response?.takeIf { it.isSuccessful }?.run {
-                        body()?.run {
-                            hasNextPage = info.next.isNullOrEmpty().not()
-                            charactersAdapter.addItems(characters)
-                        }
-                    } ?: activity?.showToast()
-                }
-
-                override fun onFailure(call: Call<CharactersResponse>?, t: Throwable?) {
-                    activity?.showToast()
-                }
+            characters.observe(viewLifecycleOwner, Observer { listCharacters ->
+                charactersAdapter.addItems(listCharacters.toMutableList())
             })
+        }
+    }
+
+    private fun observeToShowToast(liveData: LiveData<Boolean>, messageId: Int) {
+        liveData.observe(viewLifecycleOwner, Observer { shouldShow ->
+            if (shouldShow) activity?.showToast(messageId)
+        })
     }
 
     private fun onClick(id: Int) {
