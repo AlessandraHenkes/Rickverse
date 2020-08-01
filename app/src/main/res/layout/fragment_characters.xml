@@ -29,10 +29,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_inside"
+            android:layout_marginBottom="@dimen/margin_outside"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ttCharacters"
+            app:layout_constraintVertical_bias="0"
             app:spanCount="@integer/characters_list_span_count"
             tools:itemCount="12"
             tools:listitem="@layout/item_character" />
