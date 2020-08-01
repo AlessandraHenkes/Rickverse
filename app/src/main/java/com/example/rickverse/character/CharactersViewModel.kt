@@ -43,12 +43,13 @@ class CharactersViewModel(private val charactersService: CharactersService) : Vi
                     response: Response<CharactersResponse>?
                 ) {
                     _showMessageLoading.postValue(false)
+                    _showMessageError.postValue(response?.isSuccessful?.not())
                     response?.takeIf { it.isSuccessful }?.run {
                         body()?.run {
                             _hasReachedEnd.postValue(info.next.isNullOrEmpty())
                             _characters.postValue(characters)
                         }
-                    } ?: _showMessageError.postValue(true)
+                    }
                 }
 
                 override fun onFailure(call: Call<CharactersResponse>?, t: Throwable?) {
