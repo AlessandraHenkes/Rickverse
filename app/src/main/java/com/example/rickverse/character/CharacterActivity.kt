@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.rickverse.R
+import com.example.rickverse.favorite.FavoritesSharedPreferencesService
 import kotlinx.android.synthetic.main.activity_character.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -17,6 +18,9 @@ class CharacterActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_character)
+        intent?.run {
+            id = getIntExtra(CHARACTER_ID, 0)
+        }
         setUI()
         loadCharacter()
     }
@@ -33,9 +37,20 @@ class CharacterActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
+        fabFavoriteCharacter.setOnClickListener { toggleFavorite() }
     }
 
     private fun loadCharacter() {
+        isFavoriteCharacter = FavoritesSharedPreferencesService.isFavorite(this, id)
+        toggleFavoriteIcon()
+    }
+
+    private fun toggleFavorite() {
+        isFavoriteCharacter = if (isFavoriteCharacter) {
+            FavoritesSharedPreferencesService.remove(this, id).not()
+        } else {
+            FavoritesSharedPreferencesService.add(this, id)
+        }
         toggleFavoriteIcon()
     }
 

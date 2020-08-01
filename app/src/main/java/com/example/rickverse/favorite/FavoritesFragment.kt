@@ -25,7 +25,7 @@ class FavoritesFragment : Fragment() {
         lvFavorites.adapter = ArrayAdapter<Int>(
             requireContext(),
             android.R.layout.simple_list_item_1,
-            arrayListOf(1, 2, 3)
+            FavoritesSharedPreferencesService.getAll(context)
         )
 
         lvFavorites.setOnItemClickListener { _, _, position, _ ->
