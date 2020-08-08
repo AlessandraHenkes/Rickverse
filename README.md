@@ -73,3 +73,8 @@
     - Configuração do Retrofit;
     - Execução da chamada e Callback de retorno (utilizando enqueue).
 - Infinite scroll com OnScrollChangeListener.
+
+### 4º dia (01/08):
+- Shared Preferences;
+- Padrão de arquitetura MVVM;
+- Testes unitários.
