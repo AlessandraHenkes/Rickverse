@@ -1,8 +1,6 @@
 package com.example.rickverse.character.testData
 
-import com.example.rickverse.model.CharacterPreview
-import com.example.rickverse.model.CharactersResponse
-import com.example.rickverse.model.Info
+import com.example.rickverse.model.*
 
 object CharactersData {
 
@@ -30,6 +28,16 @@ object CharactersData {
     val CHARACTERS_RESPONSE_WITHOUT_NEXT_PAGE = CharactersResponse(
         info = INFO_WITHOUT_NEXT_PAGE,
         characters = CHARACTERS
+    )
+
+    val CHARACTER = CharacterResponse(
+        id = 1,
+        name = "Rick Sanchez",
+        status = Status.ALIVE,
+        species = "Human",
+        gender = Gender.MALE,
+        origin = Origin(name = "Earth (C-137)", url = "url"),
+        image = "imageUrl"
     )
 
 }

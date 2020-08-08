@@ -13,11 +13,19 @@ class Title @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
+    var text: String? = null
+        set(value) {
+            field = value
+            value?.let {
+                tvTitle.text = it
+            }
+        }
+
     init {
-        val view = LayoutInflater.from(context).inflate(R.layout.title, this, true)
+        LayoutInflater.from(context).inflate(R.layout.title, this, true)
         attrs?.let { attributeSet ->
             context.obtainStyledAttributes(attributeSet, R.styleable.Title).run {
-                view.tvTitle.text = getString(R.styleable.Title_text)
+                text = getString(R.styleable.Title_text)
                 recycle()
             }
         }
