@@ -5,23 +5,24 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
 import com.example.rickverse.extension.enabledChildren
 import com.example.rickverse.extension.hideError
 import com.example.rickverse.extension.showError
+import com.example.rickverse.model.Status
+import com.example.rickverse.search.result.intentSearchResultsActivity
+import com.example.rickverse.util.ViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_search.*
 
-private const val MINIMUM_CHARACTERS_SEARCH = 3
-
 class SearchFragment : Fragment() {
 
-    private var isNameValid = false
-    private var isSpeciesValid = false
-    private var isStatusValid = false
+    private lateinit var searchViewModel: SearchViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,19 +33,30 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchViewModel = ViewModelProvider(
+            this,
+            ViewModelFactory()
+        ).get(SearchViewModel::class.java)
 
-        with(btnSearch) {
-            isEnabled = false
-            setOnClickListener {
-                Toast.makeText(context, "Vai buscar!", Toast.LENGTH_LONG).show()
-            }
+        setUI()
+        initiateObserves()
+    }
+
+    private fun setUI() {
+        btnSearch.setOnClickListener {
+            startActivity(
+                requireContext().intentSearchResultsActivity(
+                    name = tieName.text?.toString(),
+                    species = tieSpecies.text?.toString(),
+                    status = mapStatus()
+                )
+            )
         }
 
         with(rgStatus) {
             enabledChildren(false)
             setOnCheckedChangeListener { _, _ ->
-                isStatusValid = checkedRadioButtonId != -1
-                updateButtonState()
+                searchViewModel.verifyStatus(checkedRadioButtonId)
             }
         }
 
@@ -55,58 +67,61 @@ class SearchFragment : Fragment() {
             }
         }
 
-        verifyEditTextValue(editText = tieName, textInputLayout = tilName) { value ->
-            isNameValid = value.length >= MINIMUM_CHARACTERS_SEARCH
-            isNameValid
-        }
+        verifyEditTextValue(
+            editText = tieName,
+            textInputLayout = tilName,
+            validation = searchViewModel::verifyName
+        )
 
-        verifyEditTextValue(editText = tieSpecies, textInputLayout = tilSpecies) { value ->
-            isSpeciesValid = value.length >= MINIMUM_CHARACTERS_SEARCH
-            isSpeciesValid
+        verifyEditTextValue(
+            editText = tieSpecies,
+            textInputLayout = tilSpecies,
+            validation = searchViewModel::verifySpecies
+        )
+    }
+
+    private fun initiateObserves() {
+        searchViewModel.run {
+            isButtonEnabled.observe(viewLifecycleOwner, Observer { isEnabled ->
+                btnSearch.isEnabled = isEnabled
+            })
+
+            observeToShowError(showErrorName, tilName)
+            observeToShowError(showErrorSpecies, tilSpecies)
         }
     }
 
     private fun verifyEditTextValue(
         editText: EditText,
         textInputLayout: TextInputLayout,
-        validation: ((value: String) -> Boolean)
+        validation: ((value: String, lostFocus: Boolean) -> Unit)
     ) {
         editText.doAfterTextChanged {
-            verifyValueAndSetError(
-                value = it.toString(),
-                textInputLayout = textInputLayout,
-                validation = validation
-            )
+            validation(it.toString(), false)
         }
         editText.setOnFocusChangeListener { _, hasFocus ->
             if (hasFocus) {
                 textInputLayout.hideError()
             } else {
-                verifyValueAndSetError(
-                    value = editText.text.toString(),
-                    textInputLayout = textInputLayout,
-                    validation = validation,
-                    showError = true
-                )
+                validation(editText.text.toString(), true)
             }
         }
     }
 
-    private fun verifyValueAndSetError(
-        value: String,
-        textInputLayout: TextInputLayout,
-        showError: Boolean = false,
-        validation: ((value: String) -> Boolean)
-    ) {
-        if (value.isNotEmpty() && validation(value).not() && showError) {
-            textInputLayout.showError(getString(R.string.minimum_character_search_error))
-        }
-
-        updateButtonState()
+    private fun observeToShowError(liveData: LiveData<Boolean>, textInputLayout: TextInputLayout) {
+        liveData.observe(viewLifecycleOwner, Observer { shouldShow ->
+            if (shouldShow) {
+                textInputLayout.showError(getString(R.string.minimum_character_search_error))
+            }
+        })
     }
 
-    private fun updateButtonState() {
-        btnSearch.isEnabled = isNameValid || isSpeciesValid || isStatusValid
-    }
+    private fun mapStatus(): String? =
+        when (rgStatus.checkedRadioButtonId) {
+            rbAlive.id -> Status.ALIVE
+            rbDead.id -> Status.DEAD
+            rbUnknown.id -> Status.UNKNOWN
+            else -> null
+        }?.value
 
 }
