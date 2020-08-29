@@ -21,4 +21,12 @@ interface CharactersService {
         @Path("ids") ids: List<Int>
     ): Call<List<CharacterPreview>>
 
+    @GET("character")
+    fun search(
+        @Query("name") name: String?,
+        @Query("species") species: String?,
+        @Query("status") status: String?,
+        @Query("page") page: Int?
+    ): Call<CharactersResponse>
+
 }

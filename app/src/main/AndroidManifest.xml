@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".character.CharacterActivity" />
+        <activity android:name=".search.result.SearchResultsActivity" />
     </application>
 
 </manifest>
