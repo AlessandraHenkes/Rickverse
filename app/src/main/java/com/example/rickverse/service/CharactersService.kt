@@ -1,5 +1,6 @@
 package com.example.rickverse.service
 
+import com.example.rickverse.model.CharacterPreview
 import com.example.rickverse.model.CharacterResponse
 import com.example.rickverse.model.CharactersResponse
 import retrofit2.Call
@@ -14,5 +15,10 @@ interface CharactersService {
 
     @GET("character/{id}")
     fun getCharacterInfo(@Path("id") id: Int): Call<CharacterResponse>
+
+    @GET("character/{ids}")
+    fun getFavorites(
+        @Path("ids") ids: List<Int>
+    ): Call<List<CharacterPreview>>
 
 }

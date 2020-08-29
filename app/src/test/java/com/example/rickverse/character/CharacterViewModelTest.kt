@@ -249,11 +249,10 @@ class CharacterViewModelTest {
 
     @After
     fun tearDown() {
-        characterViewModel = CharacterViewModel(charactersService).apply {
+        characterViewModel.apply {
             showMessageLoading.removeObserver(observerShowMessageLoading)
             showMessageError.removeObserver(observerShowMessageError)
             characterInfo.removeObserver(observerCharacterInfo)
         }
-
     }
 }

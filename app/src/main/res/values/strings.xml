@@ -31,4 +31,7 @@
     <!-- Shared Preferences Key -->
     <string name="shared_preferences_key">com.example.rickverse</string>
 
+    <!-- Favorites -->
+    <string name="no_favorite_characters_added">You haven\'t added characters to your favorites</string>
+
 </resources>

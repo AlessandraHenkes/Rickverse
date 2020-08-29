@@ -18,7 +18,7 @@ object CharactersData {
         prev = null
     )
 
-    private val CHARACTERS = listOf<CharacterPreview>()
+    val CHARACTERS = listOf<CharacterPreview>()
 
     val CHARACTERS_RESPONSE_NEXT_PAGE = CharactersResponse(
         info = INFO_WITH_NEXT_PAGE,

@@ -23,17 +23,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:text="@string/favorites" />
 
-        <ListView
-            android:id="@+id/lvFavorites"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvFavoritesCharacters"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_inside"
-            android:divider="@color/accent"
-            android:dividerHeight="2dp"
+            android:layout_marginBottom="@dimen/margin_outside"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ttFavorites" />
+            app:layout_constraintTop_toBottomOf="@id/ttFavorites"
+            app:layout_constraintVertical_bias="0"
+            app:spanCount="@integer/characters_list_span_count"
+            tools:itemCount="12"
+            tools:listitem="@layout/item_character" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
