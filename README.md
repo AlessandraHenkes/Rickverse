@@ -80,3 +80,9 @@ Os conteúdos estão estruturados de acordo com os dias e os tópicos dos extras
 - Shared Preferences;
 - Padrão de arquitetura MVVM;
 - Testes unitários.
+
+### Extras:
+
+- Data binding:
+    - Utilização;
+    - Binding adapter.
