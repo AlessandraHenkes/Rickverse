@@ -1,5 +1,7 @@
 # Treinamento Android para iniciantes
 
+Os conteúdos estão estruturados de acordo com os dias e os tópicos dos extras, navegue entre as branchs para acessar os mesmos. Em caso de dúvidas, entre em contato :)
+
 ## Conteúdos explorados:
 
 ### 1º dia (22/07):
