@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
+import com.example.rickverse.databinding.FragmentSearchBinding
 import com.example.rickverse.model.Status
 import com.example.rickverse.search.result.intentSearchResultsActivity
 import com.example.rickverse.util.extension.enabledChildren
@@ -28,16 +29,19 @@ class SearchFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_search, container, false)
+        return FragmentSearchBinding.inflate(inflater).apply {
+            lifecycleOwner = viewLifecycleOwner
+            vm = ViewModelProvider(
+                this@SearchFragment,
+                ViewModelFactory()
+            ).get(SearchViewModel::class.java).apply {
+                searchViewModel = this
+            }
+        }.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        searchViewModel = ViewModelProvider(
-            this,
-            ViewModelFactory()
-        ).get(SearchViewModel::class.java)
-
         setUI()
         initiateObserves()
     }

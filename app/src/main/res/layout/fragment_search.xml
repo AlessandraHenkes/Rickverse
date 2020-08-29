@@ -1,136 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fillViewport="true"
-    tools:context=".search.SearchFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.rickverse.search.SearchViewModel" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/margin_outside">
+        android:fillViewport="true"
+        tools:context=".search.SearchFragment">
 
-        <com.example.rickverse.component.Title
-            android:id="@+id/ttSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:text="@string/search_characters" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/margin_outside">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_inside"
-            android:hint="@string/name"
-            android:theme="@style/TextInputLayout"
-            app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ttSearch">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tieName"
-                android:layout_width="match_parent"
+            <com.example.rickverse.component.Title
+                android:id="@+id/ttSearch"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionNext"
-                android:inputType="text"
-                android:textColor="@color/font_text" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@string/search_characters" />
 
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilSpecies"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_inside"
-            android:hint="@string/specie"
-            android:theme="@style/TextInputLayout"
-            app:errorEnabled="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilName">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tieSpecies"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:imeOptions="actionDone"
-                android:inputType="text"
-                android:textColor="@color/font_text" />
+                android:layout_marginTop="@dimen/margin_inside"
+                android:hint="@string/name"
+                android:theme="@style/TextInputLayout"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ttSearch">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="text"
+                    android:textColor="@color/font_text" />
 
-        <TextView
-            android:id="@+id/tvStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_inside"
-            android:text="@string/status"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tilSpecies" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/swStatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@id/tvStatus"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tvStatus"
-            app:trackTint="@color/button_disabled" />
-
-        <RadioGroup
-            android:id="@+id/rgStatus"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvStatus">
-
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rbAlive"
-                android:layout_width="match_parent"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilSpecies"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/radio_button_tint"
-                android:text="@string/alive"
-                android:textColor="@color/font_text" />
+                android:layout_marginTop="@dimen/margin_inside"
+                android:hint="@string/specie"
+                android:theme="@style/TextInputLayout"
+                app:errorEnabled="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilName">
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rbDead"
-                android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tieSpecies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    android:textColor="@color/font_text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/radio_button_tint"
-                android:text="@string/dead"
-                android:textColor="@color/font_text" />
+                android:layout_marginTop="@dimen/margin_inside"
+                android:text="@string/status"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tilSpecies" />
 
-            <com.google.android.material.radiobutton.MaterialRadioButton
-                android:id="@+id/rbUnknown"
-                android:layout_width="match_parent"
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/swStatus"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:buttonTint="@color/radio_button_tint"
-                android:text="@string/unknown"
-                android:textColor="@color/font_text" />
+                app:layout_constraintBottom_toBottomOf="@id/tvStatus"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvStatus"
+                app:trackTint="@color/button_disabled" />
 
-        </RadioGroup>
+            <RadioGroup
+                android:id="@+id/rgStatus"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvStatus">
 
-        <Button
-            android:id="@+id/btnSearch"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_marginTop="@dimen/margin_inside"
-            android:text="@string/search"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rgStatus"
-            app:layout_constraintVertical_bias="1"
-            tools:background="@color/primary" />
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbAlive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/radio_button_tint"
+                    android:text="@string/alive"
+                    android:textColor="@color/font_text" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbDead"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/radio_button_tint"
+                    android:text="@string/dead"
+                    android:textColor="@color/font_text" />
 
-</androidx.core.widget.NestedScrollView>
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rbUnknown"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/radio_button_tint"
+                    android:text="@string/unknown"
+                    android:textColor="@color/font_text" />
+
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnSearch"
+                style="@style/Button"
+                android:layout_width="0dp"
+                android:layout_marginTop="@dimen/margin_inside"
+                android:text="@string/search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rgStatus"
+                app:layout_constraintVertical_bias="1"
+                tools:background="@color/primary" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
