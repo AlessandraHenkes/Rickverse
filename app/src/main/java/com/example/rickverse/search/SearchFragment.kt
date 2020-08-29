@@ -11,12 +11,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
-import com.example.rickverse.extension.enabledChildren
-import com.example.rickverse.extension.hideError
-import com.example.rickverse.extension.showError
 import com.example.rickverse.model.Status
 import com.example.rickverse.search.result.intentSearchResultsActivity
-import com.example.rickverse.util.ViewModelFactory
+import com.example.rickverse.util.extension.enabledChildren
+import com.example.rickverse.util.extension.hideError
+import com.example.rickverse.util.extension.showError
+import com.example.rickverse.util.viewmodelfactory.ViewModelFactory
 import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_search.*
 

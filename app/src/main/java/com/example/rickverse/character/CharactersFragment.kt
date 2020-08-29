@@ -10,12 +10,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
-import com.example.rickverse.character.adpter.CharactersAdapter
-import com.example.rickverse.extension.showToast
+import com.example.rickverse.character.adapter.CharactersAdapter
 import com.example.rickverse.service.RetrofitClient
-import com.example.rickverse.util.CharacterViewModelFactory
 import com.example.rickverse.util.EndlessScrollView
 import com.example.rickverse.util.GridSpacingItemDecoration
+import com.example.rickverse.util.extension.showToast
+import com.example.rickverse.util.viewmodelfactory.CharacterViewModelFactory
 import kotlinx.android.synthetic.main.fragment_characters.*
 
 class CharactersFragment : Fragment() {

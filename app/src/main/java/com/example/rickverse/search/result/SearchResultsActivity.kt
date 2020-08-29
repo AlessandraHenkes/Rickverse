@@ -10,12 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.rickverse.R
 import com.example.rickverse.character.CHARACTER_ID
 import com.example.rickverse.character.CharacterActivity
-import com.example.rickverse.character.adpter.CharactersAdapter
-import com.example.rickverse.extension.showToast
+import com.example.rickverse.character.adapter.CharactersAdapter
 import com.example.rickverse.service.RetrofitClient
-import com.example.rickverse.util.CharacterViewModelFactory
 import com.example.rickverse.util.EndlessScrollView
 import com.example.rickverse.util.GridSpacingItemDecoration
+import com.example.rickverse.util.extension.showToast
+import com.example.rickverse.util.viewmodelfactory.CharacterViewModelFactory
 import kotlinx.android.synthetic.main.activity_search_results.*
 import kotlinx.android.synthetic.main.toolbar.*
 

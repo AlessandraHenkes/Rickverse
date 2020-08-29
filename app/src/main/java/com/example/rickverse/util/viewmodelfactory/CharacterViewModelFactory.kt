@@ -1,4 +1,4 @@
-package com.example.rickverse.util
+package com.example.rickverse.util.viewmodelfactory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

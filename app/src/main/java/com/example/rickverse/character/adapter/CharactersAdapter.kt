@@ -1,4 +1,4 @@
-package com.example.rickverse.character.adpter
+package com.example.rickverse.character.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

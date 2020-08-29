@@ -8,11 +8,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.rickverse.R
-import com.example.rickverse.extension.showToast
 import com.example.rickverse.favorite.FavoritesSharedPreferencesService
 import com.example.rickverse.model.CharacterResponse
 import com.example.rickverse.service.RetrofitClient
-import com.example.rickverse.util.CharacterViewModelFactory
+import com.example.rickverse.util.extension.showToast
+import com.example.rickverse.util.viewmodelfactory.CharacterViewModelFactory
 import kotlinx.android.synthetic.main.activity_character.*
 import kotlinx.android.synthetic.main.toolbar.*
 
@@ -28,7 +28,9 @@ class CharacterActivity : AppCompatActivity() {
 
         characterViewModel = ViewModelProvider(
             this,
-            CharacterViewModelFactory(RetrofitClient.getCharacterService())
+            CharacterViewModelFactory(
+                RetrofitClient.getCharacterService()
+            )
         ).get(CharacterViewModel::class.java)
 
         setUI()

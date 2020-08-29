@@ -1,4 +1,4 @@
-package com.example.rickverse.extension
+package com.example.rickverse.util.extension
 
 import com.google.android.material.textfield.TextInputLayout
 
