@@ -2,18 +2,16 @@ package com.example.rickverse.character
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.example.rickverse.R
+import com.example.rickverse.databinding.ActivityCharacterBinding
 import com.example.rickverse.favorite.FavoritesSharedPreferencesService
-import com.example.rickverse.model.CharacterResponse
 import com.example.rickverse.service.RetrofitClient
 import com.example.rickverse.util.extension.showToast
 import com.example.rickverse.util.viewmodelfactory.CharacterViewModelFactory
-import kotlinx.android.synthetic.main.activity_character.*
 import kotlinx.android.synthetic.main.toolbar.*
 
 const val CHARACTER_ID = "characterId"
@@ -24,15 +22,13 @@ class CharacterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_character)
-
         characterViewModel = ViewModelProvider(
             this,
             CharacterViewModelFactory(
                 RetrofitClient.getCharacterService()
             )
         ).get(CharacterViewModel::class.java)
-
+        initiateBinding()
         setUI()
         initiateObserves()
         loadCharacter()
@@ -43,6 +39,16 @@ class CharacterActivity : AppCompatActivity() {
         return true
     }
 
+    private fun initiateBinding() {
+        DataBindingUtil.setContentView<ActivityCharacterBinding>(
+            this,
+            R.layout.activity_character
+        ).apply {
+            lifecycleOwner = this@CharacterActivity
+            vm = characterViewModel
+        }
+    }
+
     private fun setUI() {
         setSupportActionBar(toolbar)
         supportActionBar?.run {
@@ -50,7 +56,6 @@ class CharacterActivity : AppCompatActivity() {
             setDisplayShowHomeEnabled(true)
             setDisplayShowTitleEnabled(false)
         }
-        fabFavoriteCharacter.setOnClickListener { characterViewModel.toggleFavorite() }
     }
 
     private fun initiateObserves() {
@@ -65,7 +70,6 @@ class CharacterActivity : AppCompatActivity() {
                         id
                     ).not()
                 )
-                toggleFavoriteIcon()
             })
             shouldAddToFavorites.observe(this@CharacterActivity, Observer {
                 setIsFavoriteCharacter(
@@ -74,11 +78,6 @@ class CharacterActivity : AppCompatActivity() {
                         id
                     )
                 )
-                toggleFavoriteIcon()
-            })
-
-            characterInfo.observe(this@CharacterActivity, Observer { character ->
-                setCharacter(character)
             })
         }
     }
@@ -94,32 +93,8 @@ class CharacterActivity : AppCompatActivity() {
                     id
                 )
             )
-        }
-        toggleFavoriteIcon()
 
-        characterViewModel.loadCharacter()
-    }
-
-    private fun toggleFavoriteIcon() {
-        fabFavoriteCharacter.setImageDrawable(
-            ContextCompat.getDrawable(
-                this,
-                if (characterViewModel.isFavorite.value == true) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_border
-            )
-        )
-    }
-
-    private fun setCharacter(character: CharacterResponse) {
-        with(character) {
-            ttCharacter.text = name
-            ivCharacter.contentDescription = name
-            Glide.with(this@CharacterActivity)
-                .load(image)
-                .into(ivCharacter)
-            tvCharacterStatusValue.text = status.value
-            tvCharacterSpecieValue.text = species
-            tvCharacterGenderValue.text = gender.value
-            tvCharacterOriginValue.text = origin.name
+            loadCharacter()
         }
     }
 

@@ -1,137 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".character.CharacterActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <include layout="@layout/toolbar" />
+    <data>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar">
+        <variable
+            name="vm"
+            type="com.example.rickverse.character.CharacterViewModel" />
+    </data>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".character.CharacterActivity">
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gdStart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_begin="@dimen/margin_outside" />
+        <include layout="@layout/toolbar" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/gdEnd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                app:layout_constraintGuide_end="@dimen/margin_outside" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
 
-            <com.example.rickverse.component.Title
-                android:id="@+id/ttCharacter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_inside"
-                app:layout_constraintEnd_toEndOf="@id/gdEnd"
-                app:layout_constraintStart_toStartOf="@id/gdStart"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="RICK SANCHEZ" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/ivCharacter"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_inside"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/ttCharacter"
-                tools:layout_height="300dp"
-                tools:src="@tools:sample/backgrounds/scenic" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gdStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="@dimen/margin_outside" />
 
-            <TextView
-                android:id="@+id/tvCharacterStatusLabel"
-                style="@style/CharacterInfoLabel"
-                android:layout_marginTop="@dimen/margin_inside"
-                android:text="@string/status_colon"
-                app:layout_constraintStart_toStartOf="@id/gdStart"
-                app:layout_constraintTop_toBottomOf="@id/ivCharacter" />
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/gdEnd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="@dimen/margin_outside" />
 
-            <TextView
-                android:id="@+id/tvCharacterStatusValue"
-                style="@style/CharacterInfoValue"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterStatusLabel"
-                app:layout_constraintEnd_toEndOf="@id/gdEnd"
-                app:layout_constraintStart_toEndOf="@id/tvCharacterStatusLabel"
-                tools:text="@string/alive" />
+                <com.example.rickverse.component.Title
+                    android:id="@+id/ttCharacter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_inside"
+                    app:layout_constraintEnd_toEndOf="@id/gdEnd"
+                    app:layout_constraintStart_toStartOf="@id/gdStart"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:text="@{vm.characterInfo.name}"
+                    tools:text="RICK SANCHEZ" />
 
-            <TextView
-                android:id="@+id/tvCharacterSpecieLabel"
-                style="@style/CharacterInfoLabel"
-                android:text="@string/specie_colon"
-                app:layout_constraintStart_toStartOf="@id/gdStart"
-                app:layout_constraintTop_toBottomOf="@id/tvCharacterStatusLabel" />
+                <ImageView
+                    android:id="@+id/ivCharacter"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_inside"
+                    android:contentDescription="@{vm.characterInfo.name}"
+                    app:imageUrl="@{vm.characterInfo.image}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ttCharacter"
+                    tools:layout_height="300dp"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
-            <TextView
-                android:id="@+id/tvCharacterSpecieValue"
-                style="@style/CharacterInfoValue"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterSpecieLabel"
-                app:layout_constraintEnd_toEndOf="@id/gdEnd"
-                app:layout_constraintStart_toEndOf="@id/tvCharacterSpecieLabel"
-                tools:text="Human" />
+                <TextView
+                    android:id="@+id/tvCharacterStatusLabel"
+                    style="@style/CharacterInfoLabel"
+                    android:layout_marginTop="@dimen/margin_inside"
+                    android:text="@string/status_colon"
+                    app:layout_constraintStart_toStartOf="@id/gdStart"
+                    app:layout_constraintTop_toBottomOf="@id/ivCharacter" />
 
-            <TextView
-                android:id="@+id/tvCharacterGenderLabel"
-                style="@style/CharacterInfoLabel"
-                android:text="@string/gender_colon"
-                app:layout_constraintStart_toStartOf="@id/gdStart"
-                app:layout_constraintTop_toBottomOf="@id/tvCharacterSpecieLabel" />
+                <TextView
+                    android:id="@+id/tvCharacterStatusValue"
+                    style="@style/CharacterInfoValue"
+                    android:text="@{vm.characterInfo.status.value}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterStatusLabel"
+                    app:layout_constraintEnd_toEndOf="@id/gdEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvCharacterStatusLabel"
+                    tools:text="@string/alive" />
 
-            <TextView
-                android:id="@+id/tvCharacterGenderValue"
-                style="@style/CharacterInfoValue"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterGenderLabel"
-                app:layout_constraintEnd_toEndOf="@id/gdEnd"
-                app:layout_constraintStart_toEndOf="@id/tvCharacterGenderLabel"
-                tools:text="Male" />
+                <TextView
+                    android:id="@+id/tvCharacterSpecieLabel"
+                    style="@style/CharacterInfoLabel"
+                    android:text="@string/specie_colon"
+                    app:layout_constraintStart_toStartOf="@id/gdStart"
+                    app:layout_constraintTop_toBottomOf="@id/tvCharacterStatusLabel" />
 
-            <TextView
-                android:id="@+id/tvCharacterOriginLabel"
-                style="@style/CharacterInfoLabel"
-                android:layout_marginBottom="@dimen/margin_outside"
-                android:text="@string/origin_colon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/gdStart"
-                app:layout_constraintTop_toBottomOf="@id/tvCharacterGenderLabel"
-                app:layout_constraintVertical_bias="0" />
+                <TextView
+                    android:id="@+id/tvCharacterSpecieValue"
+                    style="@style/CharacterInfoValue"
+                    android:text="@{vm.characterInfo.species}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterSpecieLabel"
+                    app:layout_constraintEnd_toEndOf="@id/gdEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvCharacterSpecieLabel"
+                    tools:text="Human" />
 
-            <TextView
-                android:id="@+id/tvCharacterOriginValue"
-                style="@style/CharacterInfoValue"
-                app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterOriginLabel"
-                app:layout_constraintEnd_toEndOf="@id/gdEnd"
-                app:layout_constraintStart_toEndOf="@id/tvCharacterOriginLabel"
-                tools:text="Earth (C-137)" />
+                <TextView
+                    android:id="@+id/tvCharacterGenderLabel"
+                    style="@style/CharacterInfoLabel"
+                    android:text="@string/gender_colon"
+                    app:layout_constraintStart_toStartOf="@id/gdStart"
+                    app:layout_constraintTop_toBottomOf="@id/tvCharacterSpecieLabel" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tvCharacterGenderValue"
+                    style="@style/CharacterInfoValue"
+                    android:text="@{vm.characterInfo.gender.value}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterGenderLabel"
+                    app:layout_constraintEnd_toEndOf="@id/gdEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvCharacterGenderLabel"
+                    tools:text="Male" />
 
-    </androidx.core.widget.NestedScrollView>
+                <TextView
+                    android:id="@+id/tvCharacterOriginLabel"
+                    style="@style/CharacterInfoLabel"
+                    android:layout_marginBottom="@dimen/margin_outside"
+                    android:text="@string/origin_colon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/gdStart"
+                    app:layout_constraintTop_toBottomOf="@id/tvCharacterGenderLabel"
+                    app:layout_constraintVertical_bias="0" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabFavoriteCharacter"
-        android:layout_width="@dimen/fab_button_width"
-        android:layout_height="@dimen/fab_button_height"
-        android:layout_marginEnd="@dimen/margin_fab_end"
-        android:layout_marginBottom="@dimen/margin_fab_bottom"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@drawable/ic_favorite_border" />
+                <TextView
+                    android:id="@+id/tvCharacterOriginValue"
+                    style="@style/CharacterInfoValue"
+                    android:text="@{vm.characterInfo.origin.name}"
+                    app:layout_constraintBaseline_toBaselineOf="@id/tvCharacterOriginLabel"
+                    app:layout_constraintEnd_toEndOf="@id/gdEnd"
+                    app:layout_constraintStart_toEndOf="@id/tvCharacterOriginLabel"
+                    tools:text="Earth (C-137)" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabFavoriteCharacter"
+            android:layout_width="@dimen/fab_button_width"
+            android:layout_height="@dimen/fab_button_height"
+            android:layout_marginEnd="@dimen/margin_fab_end"
+            android:layout_marginBottom="@dimen/margin_fab_bottom"
+            android:onClick="@{() -> vm.toggleFavorite()}"
+            android:src="@{vm.isFavorite() ? @drawable/ic_favorite_filled : @drawable/ic_favorite_border}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:src="@drawable/ic_favorite_border" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
